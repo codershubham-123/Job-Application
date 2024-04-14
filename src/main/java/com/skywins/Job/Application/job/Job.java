@@ -5,10 +5,27 @@ import jakarta.persistence.*;
 
 
 @Entity
-//@Table(name = "job_table")
+@Table(name = "job")
 public class Job {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    private Long id;
+    @Column(name = "title")
+    private String title;
+    @Column(name = "description")
+    private String description;
+    @Column(name = "minSalary")
+    private String minSalary;
+    @Column(name = "maxSalary")
+    private String maxSalary;
+    @Column(name = "location")
+    private String location;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company")
+    private Company company;
+
 
     public Long getId() {
         return id;
@@ -66,8 +83,6 @@ public class Job {
         this.company = company;
     }
 
-    private String title;
-
     public Job(Long id, String title, String description, String minSalary, String maxSalary, String location) {
         this.id = id;
         this.title = title;
@@ -77,15 +92,12 @@ public class Job {
         this.location = location;
     }
 
-    @ManyToOne
-    private Company company;
+//    @ManyToOne
+//    @Column(length = 255) // Adjust the length as per your requirement
+//    private Company company;
 
     public Job() {
     }
 
-    private Long id;
-    private String description;
-    private String minSalary;
-    private String maxSalary;
-    private String location;
+
 }

@@ -5,18 +5,22 @@ import com.skywins.Job.Application.job.Job;
 import com.skywins.Job.Application.review.Review;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.List;
 
-//@Entity
-public class Company {
+@Entity
+@Table(name = "company")
+public class Company implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "company_name")
     private String name;
+    @Column(name = "company_description")
     private String description;
 
 //    @JsonIgnore
-    @OneToMany(mappedBy = "company")
+    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
     private List<Job> jobs;
 
     @OneToMany(mappedBy = "company")
