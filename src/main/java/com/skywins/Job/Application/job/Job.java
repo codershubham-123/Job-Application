@@ -83,7 +83,6 @@ public class Job {
         this.company = company;
     }
 
-
     public Job(Long id, String title, String description, String minSalary, String maxSalary, String location) {
         this.id = id;
         this.title = title;
