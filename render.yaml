@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: Job Application
+    env: java
+    buildCommand: "mvn clean install"
+    startCommand: "java -jar target/my-app.jar"
+    plan: free
