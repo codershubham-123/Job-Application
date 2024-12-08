@@ -4,11 +4,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.skywins.Job.Application.job.Job;
 import com.skywins.Job.Application.review.Review;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
 
+
 @Entity
+@Getter
+@Setter
 @Table(name = "company")
 public class Company implements Serializable {
     @Id
@@ -32,39 +37,39 @@ public class Company implements Serializable {
         return reviews;
     }
 
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public List<Job> getJobs() {
-        return jobs;
-    }
-
-    public void setJobs(List<Job> jobs) {
-        this.jobs = jobs;
-    }
+//    public void setReviews(List<Review> reviews) {
+//        this.reviews = reviews;
+//    }
+//
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
+//
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public void setName(String name) {
+//        this.name = name;
+//    }
+//
+//    public String getDescription() {
+//        return description;
+//    }
+//
+//    public void setDescription(String description) {
+//        this.description = description;
+//    }
+//
+//    public List<Job> getJobs() {
+//        return jobs;
+//    }
+//
+//    public void setJobs(List<Job> jobs) {
+//        this.jobs = jobs;
+//    }
 }
