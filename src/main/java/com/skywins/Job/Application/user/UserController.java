@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/auth")
+@CrossOrigin(origins = "http://job-application-g6i3.onrender.com")
 public class UserController {
     @Autowired
     private UserService userService;
