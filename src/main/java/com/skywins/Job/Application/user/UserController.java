@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://job-application-g6i3.onrender.com")
+@CrossOrigin(origins = "https://job-application-g6i3.onrender.com")
 public class UserController {
     @Autowired
     private UserService userService;
