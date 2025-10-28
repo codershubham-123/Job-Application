@@ -1,7 +1,6 @@
 package com.skywins.Job.Application.company;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.skywins.Job.Application.job.Job;
 import com.skywins.Job.Application.review.Review;
 import jakarta.persistence.*;
@@ -16,7 +15,6 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "company")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Company implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,8 +24,8 @@ public class Company implements Serializable {
     @Column(name = "company_description")
     private String description;
 
-    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonIgnore
+//    @JsonIgnore
+    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
     private List<Job> jobs;
 
     @OneToMany(mappedBy = "company")

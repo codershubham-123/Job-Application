@@ -1,6 +1,5 @@
 package com.skywins.Job.Application.job;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.skywins.Job.Application.company.Company;
 import jakarta.persistence.*;
 
@@ -25,7 +24,6 @@ public class Job {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company")
-    @JsonIgnoreProperties("jobs")
     private Company company;
 
 
