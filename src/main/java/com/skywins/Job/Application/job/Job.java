@@ -4,102 +4,107 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.skywins.Job.Application.company.Company;
 import jakarta.persistence.*;
 
-
 @Entity
 @Table(name = "job")
 public class Job {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    private Long id;
-    @Column(name = "title")
-    private String title;
-    @Column(name = "description")
-    private String description;
-    @Column(name = "minSalary")
-    private String minSalary;
-    @Column(name = "maxSalary")
-    private String maxSalary;
-    @Column(name = "location")
-    private String location;
+  @Column(name = "title")
+  private String title;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "company")
-    @JsonIgnoreProperties("jobs")
-    private Company company;
+  @Column(name = "description")
+  private String description;
 
+  @Column(name = "minSalary")
+  private String minSalary;
 
-    public Long getId() {
-        return id;
-    }
+  @Column(name = "maxSalary")
+  private String maxSalary;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  @Column(name = "location")
+  private String location;
 
-    public String getTitle() {
-        return title;
-    }
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "company")
+  @JsonIgnoreProperties("jobs")
+  private Company company;
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public String getDescription() {
-        return description;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+  public String getTitle() {
+    return title;
+  }
 
-    public String getMinSalary() {
-        return minSalary;
-    }
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
-    public void setMinSalary(String minSalary) {
-        this.minSalary = minSalary;
-    }
+  public String getDescription() {
+    return description;
+  }
 
-    public String getMaxSalary() {
-        return maxSalary;
-    }
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
-    public void setMaxSalary(String maxSalary) {
-        this.maxSalary = maxSalary;
-    }
+  public String getMinSalary() {
+    return minSalary;
+  }
 
-    public String getLocation() {
-        return location;
-    }
+  public void setMinSalary(String minSalary) {
+    this.minSalary = minSalary;
+  }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
+  public String getMaxSalary() {
+    return maxSalary;
+  }
 
-    public Company getCompany() {
-        return company;
-    }
+  public void setMaxSalary(String maxSalary) {
+    this.maxSalary = maxSalary;
+  }
 
-    public void setCompany(Company company) {
-        this.company = company;
-    }
+  public String getLocation() {
+    return location;
+  }
 
-    public Job(Long id, String title, String description, String minSalary, String maxSalary, String location) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.minSalary = minSalary;
-        this.maxSalary = maxSalary;
-        this.location = location;
-    }
+  public void setLocation(String location) {
+    this.location = location;
+  }
 
-//    @ManyToOne
-//    @Column(length = 255) // Adjust the length as per your requirement
-//    private Company company;
+  public Company getCompany() {
+    return company;
+  }
 
-    public Job() {
-    }
+  public void setCompany(Company company) {
+    this.company = company;
+  }
 
+  public Job(
+      Long id,
+      String title,
+      String description,
+      String minSalary,
+      String maxSalary,
+      String location) {
+    this.id = id;
+    this.title = title;
+    this.description = description;
+    this.minSalary = minSalary;
+    this.maxSalary = maxSalary;
+    this.location = location;
+  }
 
+  //    @ManyToOne
+  //    @Column(length = 255) // Adjust the length as per your requirement
+  //    private Company company;
+
+  public Job() {}
 }

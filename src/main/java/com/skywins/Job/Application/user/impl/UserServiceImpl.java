@@ -6,53 +6,52 @@ import com.skywins.Job.Application.auth.SignupRequest;
 import com.skywins.Job.Application.user.User;
 import com.skywins.Job.Application.user.UserRepository;
 import com.skywins.Job.Application.user.UserService;
+import java.util.UUID;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    private UserRepository userRepository;
-    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+  private UserRepository userRepository;
+  private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
+  public UserServiceImpl(UserRepository userRepository) {
+    this.userRepository = userRepository;
+  }
+
+  public AuthResponse signup(SignupRequest req) {
+    if (userRepository.findByEmail(req.getEmail()).isPresent()) {
+      throw new IllegalArgumentException("Email already exists");
     }
 
+    User user = new User();
+    user.setName(req.getName());
+    user.setEmail(req.getEmail().toLowerCase());
+    user.setRole(req.getRole() == null ? "USER" : req.getRole());
+    user.setCompanyId(req.getCompanyId());
+    user.setPassword(encoder.encode(req.getPassword()));
 
-    public AuthResponse signup(SignupRequest req){
-        if(userRepository.findByEmail(req.getEmail()).isPresent()){
-            throw new IllegalArgumentException("Email already exists");
-        }
+    User savedUser = userRepository.save(user);
 
-        User user = new User();
-        user.setName(req.getName());
-        user.setEmail(req.getEmail().toLowerCase());
-        user.setRole(req.getRole() == null ? "USER" : req.getRole());
-        user.setCompanyId(req.getCompanyId());
-        user.setPassword(encoder.encode(req.getPassword()));
+    String token = UUID.randomUUID().toString();
 
-        User savedUser = userRepository.save(user);
+    return new AuthResponse("User created", token, savedUser.getId(), savedUser.getRole());
+  }
 
-        String token = UUID.randomUUID().toString();
+  public AuthResponse login(LoginRequest req) {
 
-        return new AuthResponse("User created", token, savedUser.getId(), savedUser.getRole());
+    User user =
+        userRepository
+            .findByEmail(req.getEmail().toLowerCase())
+            .orElseThrow(() -> new IllegalArgumentException("Invalid email"));
+
+    if (!encoder.matches(req.getPassword(), user.getPassword())) {
+      throw new IllegalArgumentException("Invalid credentials");
     }
 
-    public AuthResponse login(LoginRequest req){
+    String token = UUID.randomUUID().toString();
 
-        User user = userRepository.findByEmail(req.getEmail().toLowerCase()).orElseThrow(() -> new IllegalArgumentException("Invalid email"));
-
-        if (!encoder.matches(req.getPassword(), user.getPassword())) {
-            throw new IllegalArgumentException("Invalid credentials");
-        }
-
-
-        String token = UUID.randomUUID().toString();
-
-        return new AuthResponse("Login successful", token, user.getId(), user.getRole());
-    }
-
+    return new AuthResponse("Login successful", token, user.getId(), user.getRole());
+  }
 }

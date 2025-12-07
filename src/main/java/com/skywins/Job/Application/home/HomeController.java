@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HomeController {
-    @GetMapping("/")
-    @ResponseBody
-    public String home(){
-        return "Welcome, you logged in";
-    }
+  @GetMapping("/")
+  @ResponseBody
+  public String home() {
+    return "Welcome, you logged in";
+  }
 }
