@@ -1,0 +1,38 @@
+[33m23a1b2f[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature/signup-flow[m[33m, [m[1;31morigin/feature/signup-flow[m[33m)[m Jobs loops data issue resolved
+[33m3e1c5d7[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m Update application.properties
+[33m54c8bc8[m Merge pull request #15 from codershubham-123/Develop
+[33m9f43e00[m[33m ([m[1;31morigin/Develop[m[33m)[m Minor changes
+[33m122c25b[m Merge pull request #14 from codershubham-123/Develop
+[33m2ad85f7[m Cross origin issue fixed
+[33m9d18686[m Merge pull request #13 from codershubham-123/Develop
+[33m801a50e[m Home controller added
+[33md612f7f[m Home controller added
+[33me1418a9[m Merge pull request #12 from codershubham-123/Develop
+[33m8352ee1[m Database changed
+[33mfbf0568[m Merge pull request #11 from codershubham-123/Develop
+[33m84fb459[m Minor changes
+[33md1f83ee[m Merge pull request #10 from codershubham-123/Develop
+[33m7ea1af4[m Dependency added
+[33m8dcdee3[m Merge pull request #9 from codershubham-123/Develop
+[33m8bfdee8[m Docker file updated
+[33m0799e7b[m Merge pull request #8 from codershubham-123/Develop
+[33m4ffca0a[m Docker file updated
+[33m3f66db6[m Merge pull request #7 from codershubham-123/Develop
+[33m5c135c4[m Docker file updated
+[33mba6bc6f[m Merge pull request #6 from codershubham-123/Develop
+[33m30c821f[m Docker dile rename
+[33m7d81430[m Merge pull request #5 from codershubham-123/Develop
+[33m713c80c[m Docker file added
+[33m60c1fe1[m Merge pull request #4 from codershubham-123/Develop
+[33m8f9bd15[m Remder File added
+[33m79fe78d[m Merge pull request #3 from codershubham-123/Develop
+[33m4316bdc[m Default port added
+[33mfc44a04[m Ready for render deployment
+[33m1090059[m Procfile added and port added in properties
+[33maca4f5f[m Merge pull request #2 from codershubham-123/Develop
+[33mcbf2cc9[m Login and signup method implemented
+[33m4233fd0[m Merge pull request #1 from codershubham-123/Develop
+[33m4695fc0[m Minor changes
+[33mf61defe[m Minor changes in table
+[33m7f3698e[m Minor changes in table
+[33m65187bd[m SpringBoot Job Application
