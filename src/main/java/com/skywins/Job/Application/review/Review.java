@@ -7,60 +7,60 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "review")
 public class Review {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(name = "title")
-    private String title;
-    @Column(name = "description")
-    private String description;
-    @Column(name = "rating")
-    private double rating;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @JsonIgnore
-    @ManyToOne
-    private Company company;
+  @Column(name = "title")
+  private String title;
 
-    public Review() {
-    }
+  @Column(name = "description")
+  private String description;
 
-    public Company getCompany() {
-        return company;
-    }
+  @Column(name = "rating")
+  private double rating;
 
-    public void setCompany(Company company) {
-        this.company = company;
-    }
+  @JsonIgnore @ManyToOne private Company company;
 
-    public Long getId() {
-        return id;
-    }
+  public Review() {}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public Company getCompany() {
+    return company;
+  }
 
-    public String getTitle() {
-        return title;
-    }
+  public void setCompany(Company company) {
+    this.company = company;
+  }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public String getDescription() {
-        return description;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+  public String getTitle() {
+    return title;
+  }
 
-    public double getRating() {
-        return rating;
-    }
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
-    public void setRating(double rating) {
-        this.rating = rating;
-    }
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public double getRating() {
+    return rating;
+  }
+
+  public void setRating(double rating) {
+    this.rating = rating;
+  }
 }
