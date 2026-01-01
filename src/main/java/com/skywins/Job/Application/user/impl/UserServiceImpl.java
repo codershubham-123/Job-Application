@@ -3,6 +3,7 @@ package com.skywins.Job.Application.user.impl;
 import com.skywins.Job.Application.auth.AuthResponse;
 import com.skywins.Job.Application.auth.LoginRequest;
 import com.skywins.Job.Application.auth.SignupRequest;
+import com.skywins.Job.Application.security.JwtUtil;
 import com.skywins.Job.Application.user.User;
 import com.skywins.Job.Application.user.UserRepository;
 import com.skywins.Job.Application.user.UserService;
@@ -34,7 +35,7 @@ public class UserServiceImpl implements UserService {
 
     User savedUser = userRepository.save(user);
 
-    String token = UUID.randomUUID().toString();
+    String token = JwtUtil.generateToken(savedUser.getId(), savedUser.getEmail(), savedUser.getRole());
 
     return new AuthResponse("User created", token, savedUser.getId(), savedUser.getRole());
   }
@@ -50,7 +51,7 @@ public class UserServiceImpl implements UserService {
       throw new IllegalArgumentException("Invalid credentials");
     }
 
-    String token = UUID.randomUUID().toString();
+    String token = JwtUtil.generateToken(user.getId(), user.getEmail(), user.getRole());
 
     return new AuthResponse("Login successful", token, user.getId(), user.getRole());
   }
