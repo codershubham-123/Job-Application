@@ -11,10 +11,19 @@ import java.io.IOException;
 public class JwtFilter extends OncePerRequestFilter {
 
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+
+        // Allow preflight CORS requests
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         String authHeader = request.getHeader("Authorization");
+
+        // Block request only if token missing
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.getWriter().write("Missing or invalid Authorization header");
+            response.getWriter().write("Missing Authorization header");
             return;
         }
 
@@ -38,8 +47,10 @@ public class JwtFilter extends OncePerRequestFilter {
 
     }
 
+    @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
-        String path = request.getRequestURI();
-        return path.startsWith("/api/auth");
+
+        return request.getRequestURI().startsWith("/api/auth")
+                || request.getMethod().equalsIgnoreCase("OPTIONS");
     }
 }
