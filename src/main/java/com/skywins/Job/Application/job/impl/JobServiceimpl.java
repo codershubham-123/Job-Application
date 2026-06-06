@@ -55,6 +55,14 @@ public class JobServiceimpl implements JobService {
       job.setMinSalary(updatedJob.getMinSalary());
       job.setMaxSalary(updatedJob.getMaxSalary());
       job.setLocation(updatedJob.getLocation());
+      job.setJobType(updatedJob.getJobType());
+      job.setEmploymentType(updatedJob.getEmploymentType());
+      job.setMinExperience(updatedJob.getMinExperience());
+      job.setMaxExperience(updatedJob.getMaxExperience());
+      job.setSkills(updatedJob.getSkills());
+      if (updatedJob.getPostedAt() != null) {
+        job.setPostedAt(updatedJob.getPostedAt());
+      }
       jobRepository.save(job);
       return true;
     }

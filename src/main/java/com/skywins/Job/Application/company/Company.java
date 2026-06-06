@@ -26,6 +26,15 @@ public class Company implements Serializable {
   @Column(name = "company_description")
   private String description;
 
+  @Column(name = "logo_url")
+  private String logoUrl;
+
+  @Column(name = "industry")
+  private String industry;
+
+  @Column(name = "location")
+  private String location;
+
   @JsonIgnore
   @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
   private List<Job> jobs;

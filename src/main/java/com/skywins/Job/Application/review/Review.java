@@ -3,6 +3,7 @@ package com.skywins.Job.Application.review;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.skywins.Job.Application.company.Company;
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,6 +24,28 @@ public class Review {
 
   @Column(name = "rating")
   private double rating;
+
+  @Column(name = "pros")
+  private String pros;
+
+  @Column(name = "cons")
+  private String cons;
+
+  @Column(name = "reviewer_role")
+  private String reviewerRole;
+
+  @Column(name = "employment_status")
+  private String employmentStatus;
+
+  @Column(name = "created_at")
+  private LocalDateTime createdAt;
+
+  @PrePersist
+  public void prePersist() {
+    if (createdAt == null) {
+      createdAt = LocalDateTime.now();
+    }
+  }
 
   @JsonIgnore @ManyToOne private Company company;
 
