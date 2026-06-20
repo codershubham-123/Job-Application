@@ -1,5 +1,7 @@
 package com.skywins.Job.Application.review;
 
+import com.skywins.Job.Application.common.ApiResponse;
+import com.skywins.Job.Application.review.dto.ReviewResponse;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +17,11 @@ public class ReviewController {
   }
 
   @GetMapping("/reviews")
-  public ResponseEntity<List<Review>> getAllReview(@PathVariable Long companyId) {
-    return new ResponseEntity<>(reviewService.getAllReviews(companyId), HttpStatus.OK);
+  public ResponseEntity<ApiResponse<List<ReviewResponse>>> getAllReview(
+      @PathVariable Long companyId) {
+    List<ReviewResponse> reviews =
+        reviewService.getAllReviews(companyId).stream().map(ReviewResponse::from).toList();
+    return new ResponseEntity<>(ApiResponse.of(reviews, reviews.size()), HttpStatus.OK);
   }
 
   @PostMapping("/reviews")
@@ -32,9 +37,13 @@ public class ReviewController {
   }
 
   @GetMapping("/reviews/{reviewId}")
-  public ResponseEntity<Review> getReview(
+  public ResponseEntity<ReviewResponse> getReview(
       @PathVariable Long companyId, @PathVariable Long reviewId) {
-    return new ResponseEntity<>(reviewService.getReview(companyId, reviewId), HttpStatus.OK);
+    Review review = reviewService.getReview(companyId, reviewId);
+    if (review == null) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    return new ResponseEntity<>(ReviewResponse.from(review), HttpStatus.OK);
   }
 
   @PutMapping("/reviews/{reviewId}")

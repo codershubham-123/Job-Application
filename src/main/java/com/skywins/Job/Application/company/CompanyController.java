@@ -1,5 +1,7 @@
 package com.skywins.Job.Application.company;
 
+import com.skywins.Job.Application.common.ApiResponse;
+import com.skywins.Job.Application.company.dto.CompanyResponse;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,14 +17,19 @@ public class CompanyController {
   }
 
   @GetMapping
-  public ResponseEntity<List<Company>> getAllCompanies() {
-    return new ResponseEntity<>(companyService.getAllCompanies(), HttpStatus.OK);
+  public ResponseEntity<ApiResponse<List<CompanyResponse>>> getAllCompanies() {
+    List<CompanyResponse> companies =
+        companyService.getAllCompanies().stream().map(CompanyResponse::from).toList();
+    return new ResponseEntity<>(ApiResponse.of(companies, companies.size()), HttpStatus.OK);
   }
 
   @PutMapping("/{id}")
   public ResponseEntity<String> updateCompany(@PathVariable Long id, @RequestBody Company company) {
-    companyService.updateCompany(company, id);
-    return new ResponseEntity<>("Company Updated Sucessfully", HttpStatus.OK);
+    boolean updated = companyService.updateCompany(company, id);
+    if (updated) {
+      return new ResponseEntity<>("Company Updated Sucessfully", HttpStatus.OK);
+    }
+    return new ResponseEntity<>("Company Not Found", HttpStatus.NOT_FOUND);
   }
 
   @PostMapping()
@@ -42,10 +49,10 @@ public class CompanyController {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Company> getCompany(@PathVariable Long id) {
+  public ResponseEntity<CompanyResponse> getCompany(@PathVariable Long id) {
     Company company = companyService.getCompanyById(id);
     if (company != null) {
-      return new ResponseEntity<>(company, HttpStatus.OK);
+      return new ResponseEntity<>(CompanyResponse.from(company), HttpStatus.OK);
     } else {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }

@@ -28,6 +28,9 @@ public class CompanyServiceimpl implements CompanyService {
       companyToUpdate.setDescription((company.getDescription()));
       companyToUpdate.setName(company.getName());
       companyToUpdate.setJobs(company.getJobs());
+      companyToUpdate.setLogoUrl(company.getLogoUrl());
+      companyToUpdate.setIndustry(company.getIndustry());
+      companyToUpdate.setLocation(company.getLocation());
       companyRepository.save(companyToUpdate);
       return true;
     }

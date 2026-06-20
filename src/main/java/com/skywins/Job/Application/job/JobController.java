@@ -1,5 +1,7 @@
 package com.skywins.Job.Application.job;
 
+import com.skywins.Job.Application.common.ApiResponse;
+import com.skywins.Job.Application.job.dto.JobResponse;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,9 +17,9 @@ public class JobController {
   }
 
   @GetMapping("/jobs")
-  public ResponseEntity<List<Job>> findAll() {
-
-    return ResponseEntity.ok(jobService.findAll());
+  public ResponseEntity<ApiResponse<List<JobResponse>>> findAll() {
+    List<JobResponse> jobs = jobService.findAll().stream().map(JobResponse::from).toList();
+    return ResponseEntity.ok(ApiResponse.of(jobs, jobs.size()));
   }
 
   @PostMapping("/jobs")
@@ -28,11 +30,11 @@ public class JobController {
   }
 
   @GetMapping("/jobs/{id}")
-  public ResponseEntity<Job> getJobById(@PathVariable Long id) {
+  public ResponseEntity<JobResponse> getJobById(@PathVariable Long id) {
     Job job = jobService.getJobById(id);
 
-    if (job != null) return new ResponseEntity<>(job, HttpStatus.OK);
-    return new ResponseEntity(HttpStatus.NOT_FOUND);
+    if (job != null) return new ResponseEntity<>(JobResponse.from(job), HttpStatus.OK);
+    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
   }
 
   @DeleteMapping("/jobs/{id}")
